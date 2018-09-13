@@ -193,15 +193,15 @@ func doHelmInit(p *Plugin) []string {
 		init = append(init, "--tiller-namespace")
 		init = append(init, p.Config.TillerNs)
 	}
-	// if p.Config.ClientOnly {
-	// 	init = append(init, "--client-only")
-	// }
-	// if p.Config.Upgrade {
-	// 	init = append(init, "--upgrade")
-	// }
-	// if p.Config.CanaryImage {
-	// 	init = append(init, "--canary-image")
-	// }
+	if p.Config.ClientOnly {
+		init = append(init, "--client-only")
+	}
+	if p.Config.Upgrade {
+		init = append(init, "--upgrade")
+	}
+	if p.Config.CanaryImage {
+		init = append(init, "--canary-image")
+	}
   init = append(init, "--stable-repo-url")
   init = append(init, "https://charts.bitnami.com/bitnami")
 
