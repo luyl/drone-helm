@@ -55,7 +55,7 @@ pipeline:
   publish_linux_amd64:
     image: plugins/docker
     group: publish
-    debug: true,
+    debug: true
     repo: harbor.kaoputou.com/cm/drone-helm
     registry: harbor.kaoputou.com
     auto_tag: true
