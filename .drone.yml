@@ -9,11 +9,11 @@ pipeline:
     - go get -u github.com/golang/dep/cmd/dep
     - dep ensure
 
-  test:
-    image: golang:1.10
-    commands:
-    - go vet
-    - go test ./... -cover -coverprofile=coverage.out
+  # test:
+  #   image: golang:1.10
+  #   commands:
+  #   - go vet
+  #   - go test ./... -cover -coverprofile=coverage.out
 
   build_linux_amd64:
     image: golang:1.10
@@ -54,15 +54,12 @@ pipeline:
 
   publish_linux_amd64:
     image: plugins/docker
-    group: publish
     debug: true
     repo: harbor.kaoputou.com/cm/drone-helm
     registry: harbor.kaoputou.com
-    auto_tag: true
+    tags: ${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:8}
     secrets: [ docker_password, docker_username ]
     dockerfile: Dockerfile
-    when:
-      event: [ tag, push ]
 
 #  publish_linux_arm64:
 #    image: plugins/docker
