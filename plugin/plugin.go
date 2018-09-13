@@ -48,7 +48,6 @@ type (
 		HelmRepos          []string `json:"helm_repos"`
 		Purge              bool     `json:"purge"`
 		UpdateDependencies bool     `json:"update_dependencies"`
-		StableRepoUrl      string   `json:"stable-repo-url"`
 	}
 	// Plugin default
 	Plugin struct {
@@ -203,10 +202,8 @@ func doHelmInit(p *Plugin) []string {
 	if p.Config.CanaryImage {
 		init = append(init, "--canary-image")
 	}
-	if p.Config.StableRepoUrl != "" {
-    init = append(init, "--stable-repo-url")
-    init = append(init, p.Config.StableRepoUrl)
-  }
+  init = append(init, "--stable-repo-url")
+  init = append(init, "https://charts.bitnami.com/bitnami")
 
 	return init
 

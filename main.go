@@ -142,11 +142,6 @@ func main() {
 			Usage:  "update dependency charts based on the contents of requirements.yaml file of the local chart",
 			EnvVar: "PLUGIN_UPDATE_DEPENDENCIES,UPDATE_DEPENDENCIES",
 		},
-		cli.StringFlag{
-      Name:   "stable-repo-url",
-      Usage:  "URL for stable repository (default https://kubernetes-charts.storage.googleapis.com)",
-      EnvVar: "PLUGIN_STABLE_REPO_URL,STABLE_REPO_URL",
-    },
 	}
 	if err := app.Run(os.Args); err != nil {
 		logrus.Fatal(err)
@@ -188,7 +183,6 @@ func run(c *cli.Context) error {
 			Timeout:            c.String("timeout"),
 			Force:              c.Bool("force"),
 			UpdateDependencies: c.Bool("update-dependencies"),
-			StableRepoUrl:      c.String("stable-repo-url"),
 		},
 	}
 	return p.Exec()
