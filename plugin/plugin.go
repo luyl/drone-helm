@@ -205,6 +205,8 @@ func doHelmInit(p *Plugin) []string {
   init = append(init, "--stable-repo-url")
   init = append(init, "https://charts.bitnami.com/bitnami")
 
+  log.Println("prepare to run helm " + strings.Join(init[:], " "))
+
 	return init
 
 }
