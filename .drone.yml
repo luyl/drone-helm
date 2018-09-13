@@ -57,7 +57,7 @@ pipeline:
     debug: true
     repo: harbor.kaoputou.com/cm/drone-helm
     registry: harbor.kaoputou.com
-    tags: 0.1
+    tags: ${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:8}
     secrets: [ docker_password, docker_username ]
     dockerfile: Dockerfile
 
