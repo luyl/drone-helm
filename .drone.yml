@@ -55,8 +55,11 @@ pipeline:
   publish_linux_amd64:
     image: plugins/docker
     group: publish
+    debug: true
+    repo: harbor.kaoputou.com/cm/drone-helm
+    registry: harbor.kaoputou.com
     auto_tag: true
-    secrets: [ docker_password, docker_username, plugin_repo ]
+    secrets: [ docker_password, docker_username ]
     dockerfile: Dockerfile
     when:
       event: [ tag, push ]
