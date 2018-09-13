@@ -59,7 +59,7 @@ pipeline:
     repo: harbor.kaoputou.com/cm/drone-helm
     registry: harbor.kaoputou.com
     auto_tag: true
-    secrets: [ docker_password, docker_username, plugin_repo ]
+    secrets: [ docker_password, docker_username ]
     dockerfile: Dockerfile
     when:
       event: [ tag, push ]
