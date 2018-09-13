@@ -59,7 +59,6 @@ func TestGetHelmCommandEmptyPushEvent(t *testing.T) {
 			Version:       "1.2.3",
 			Release:       "test-release",
 			Values:        `"image.tag=v.0.1.0,nameOverride=my-over-app"`,
-			StringValues:  `"long_string_value=1234567890"`,
 			Wait:          true,
 			ReuseValues:   true,
 			Timeout:       "500",
@@ -89,7 +88,6 @@ func TestGetHelmCommandUpgrade(t *testing.T) {
 			Version:       "1.2.3",
 			Release:       "test-release",
 			Values:        `"image.tag=v.0.1.0,nameOverride=my-over-app"`,
-			StringValues:  `"long_string_value=1234567890"`,
 			Wait:          true,
 			ReuseValues:   true,
 			Timeout:       "500",
@@ -117,7 +115,6 @@ func TestGetHelmDeleteCommand(t *testing.T) {
 			Chart:         "./chart/test",
 			Release:       "test-release",
 			Values:        "image.tag=v.0.1.0,nameOverride=my-over-app",
-			StringValues:  "long_string_value=1234567890",
 			Wait:          true,
 		},
 	}
@@ -144,7 +141,6 @@ func TestGetHelmDeleteCommandOverried(t *testing.T) {
 			Chart:         "./chart/test",
 			Release:       "test-release",
 			Values:        "image.tag=v.0.1.0,nameOverride=my-over-app",
-			StringValues:  "long_string_value=1234567890",
 			Wait:          true,
 			Purge:         true,
 		},
@@ -193,7 +189,6 @@ func TestResolveSecrets(t *testing.T) {
 				Release:       "test-release",
 				Prefix:        env.prefix,
 				Values:        "image.tag=$TAG,api=${API_SERVER},nameOverride=my-over-app,second.tag=${TAG}",
-				StringValues:  "long_string_value=1234567890",
 			},
 		}
 
@@ -227,11 +222,9 @@ func TestResolveSecrets(t *testing.T) {
 	testInput := []struct {
 		server        string
 		values        string
-		stringValues string
 		token         string
 		account       string
 	}{
-		{server: "http://apiserver2", token: "123456", account: "helm2", values: "aval=test", stringValues: "long_string_value=1234567890"},
 	}
 	for _, input := range testInput {
 		plugin := &Plugin{
@@ -240,7 +233,6 @@ func TestResolveSecrets(t *testing.T) {
 				ServiceAccount: input.account,
 				Token:          input.token,
 				Values:         input.values,
-				StringValues:   input.stringValues,
 			},
 		}
 
@@ -257,8 +249,6 @@ func TestResolveSecrets(t *testing.T) {
 		if plugin.Config.Values != input.values {
 			t.Errorf("failed to keep Values '%s' got '%s'", input.values, plugin.Config.Values)
 		}
-		if plugin.Config.StringValues != input.stringValues {
-			t.Errorf("failed to keep StringValues '%s' got '%s'", input.stringValues, plugin.Config.StringValues)
 		}
 	}
 }
@@ -275,7 +265,6 @@ func TestDetHelmRepoAdd(t *testing.T) {
 			Release:       "test-release",
 			Prefix:        "MY",
 			Values:        "image.tag=$TAG,api=${API_SERVER},nameOverride=my-over-app,second.tag=${TAG}",
-			StringValues:  "long_string_value=1234567890",
 			ClientOnly:    true,
 			HelmRepos: []string{
 				`"r1=http://r1.example.com"`, //handle quoted strings
@@ -357,7 +346,6 @@ func TestSetHelpCommand(t *testing.T) {
 			Release:       "test-release",
 			Prefix:        "MY",
 			Values:        "image.tag=$TAG,api=${API_SERVER},nameOverride=my-over-app,second.tag=${TAG}",
-			StringValues:  "long_string_value=1234567890",
 		},
 	}
 	setHelpCommand(plugin)
@@ -378,7 +366,6 @@ func TestDetHelmInit(t *testing.T) {
 			Release:       "test-release",
 			Prefix:        "MY",
 			Values:        "image.tag=$TAG,api=${API_SERVER},nameOverride=my-over-app,second.tag=${TAG}",
-			StringValues:  "long_string_value=1234567890",
 			TillerNs:      "system-test",
 		},
 	}
@@ -403,7 +390,6 @@ func TestDetHelmInitClient(t *testing.T) {
 			Release:       "test-release",
 			Prefix:        "MY",
 			Values:        "image.tag=$TAG,api=${API_SERVER},nameOverride=my-over-app,second.tag=${TAG}",
-			StringValues:  "long_string_value=1234567890",
 			ClientOnly:    true,
 		},
 	}
@@ -431,7 +417,6 @@ func TestDetHelmInitUpgrade(t *testing.T) {
 			Release:       "test-release",
 			Prefix:        "MY",
 			Values:        "image.tag=$TAG,api=${API_SERVER},nameOverride=my-over-app,second.tag=${TAG}",
-			StringValues:  "long_string_value=1234567890",
 			Upgrade:       true,
 		},
 	}
@@ -459,7 +444,6 @@ func TestDetHelmInitCanary(t *testing.T) {
 			Release:       "test-release",
 			Prefix:        "MY",
 			Values:        "image.tag=$TAG,api=${API_SERVER},nameOverride=my-over-app,second.tag=${TAG}",
-			StringValues:  "long_string_value=1234567890",
 			CanaryImage:   true,
 		},
 	}
@@ -493,7 +477,6 @@ func TestResolveSecretsFallback(t *testing.T) {
 			Release:       "test-release",
 			Prefix:        "MY",
 			Values:        "image.tag=$TAG,api=${API_SERVER},nottoken=${NOTTOKEN},nameOverride=my-over-app,second.tag=${TAG}",
-			StringValues:  "long_string_value=1234567890",
 		},
 	}
 

@@ -64,11 +64,6 @@ func main() {
 			EnvVar: "PLUGIN_VALUES,VALUES",
 		},
 		cli.StringFlag{
-			Name:   "string_values",
-			Usage:  "Kubernetes helm release",
-			EnvVar: "PLUGIN_STRING_VALUES,STRING_VALUES",
-		},
-		cli.StringFlag{
 			Name:   "values_files",
 			Usage:  "Helm values override files",
 			EnvVar: "PLUGIN_VALUES_FILES,VALUES_FILES",
@@ -169,7 +164,6 @@ func run(c *cli.Context) error {
 			Namespace:          c.String("namespace"),
 			SkipTLSVerify:      c.Bool("skip_tls_verify"),
 			Values:             c.String("values"),
-			StringValues:       c.String("string_values"),
 			ValuesFiles:        c.String("values_files"),
 			Release:            c.String("release"),
 			HelmRepos:          c.StringSlice("helm_repos"),
