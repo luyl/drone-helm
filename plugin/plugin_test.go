@@ -249,7 +249,6 @@ func TestResolveSecrets(t *testing.T) {
 		if plugin.Config.Values != input.values {
 			t.Errorf("failed to keep Values '%s' got '%s'", input.values, plugin.Config.Values)
 		}
-		}
 	}
 }
 
